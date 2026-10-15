@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sayanggg Masii Ndaa Moodd Iaaa? 🥺❤️</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Quicksand', sans-serif; }
+        .font-bubble { font-family: 'Fredoka', cursive; }
+        .float-animation { animation: float 3s ease-in-out infinite; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .shake-animation { animation: shake 0.5s ease-in-out; }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-8px); }
+            40%, 80% { transform: translateX(8px); }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-rose-100 via-pink-100 to-amber-100 min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
+
+    <!-- Container Utama -->
+    <div id="main-card" class="bg-white/85 backdrop-blur-md p-6 sm:p-8 rounded-3xl shadow-2xl max-w-md w-full text-center relative z-10 border-2 border-white/80 transition-all duration-300">
+        
+        <!-- Illustration / Emoji Area -->
+        <div class="relative w-36 h-36 mx-auto mb-4 float-animation flex items-center justify-center">
+            <span id="sad-emoji" class="text-8xl filter drop-shadow-md">🥺</span>
+        </div>
+
+        <!-- Judul Bujukan -->
+        <h1 id="title-text" class="text-2xl font-bold font-bubble text-rose-500 mb-2">
+            Sayanggg masii ndaaa moodd iaaa? 🥺
+        </h1>
+
+        <!-- Pesan Penyesalan -->
+        <p id="sub-text" class="text-gray-600 text-sm leading-relaxed mb-6">
+            Jangan cemberut terus dong... Aku kangen senyum kamu. Mau aku beliin minuman/jajan enak biar mood kamu balik lagi? Plisss jangan dicuekin yaaa 💔
+        </p>
+
+        <!-- Kartu Janji / Menu Jajan -->
+        <div id="promise-card" class="bg-rose-50 border border-rose-200 rounded-2xl p-4 mb-6 text-left shadow-inner">
+            <p class="text-xs font-bold text-rose-400 mb-2 uppercase tracking-wide">✨ Penawaran Pembikin Mood Balik:</p>
+            <ul class="text-xs text-gray-700 space-y-1.5 list-disc list-inside">
+                <li>Bebas pilih jajan/minuman kesukaanmu ☕🍵</li>
+                <li>Ditemenin jalan-jalan ke mana aja 🚗</li>
+                <li>Siap dengerin semua curhatan kamu ❤️</li>
+            </ul>
+        </div>
+
+        <!-- Area Tombol Interaktif -->
+        <div class="flex flex-col gap-3 relative min-h-[110px] justify-center" id="btn-container">
+            <button onclick="acceptApology()" id="yes-btn" class="w-full py-3.5 bg-rose-500 hover:bg-rose-600 text-white font-bold rounded-2xl shadow-lg shadow-rose-200 transition transform active:scale-95 text-sm z-10">
+                Udah Mood Lagi Kok 🥰
+            </button>
+            <button onmouseover="moveNoButton()" onclick="moveNoButton()" id="no-btn" class="w-full py-3 bg-gray-100 hover:bg-gray-200 text-gray-600 font-semibold rounded-2xl transition text-sm">
+                Masih Ngga Mood! 😜
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Script Interaktif -->
+    <script>
+        let noClickCount = 0;
+        let selectedSnack = "";
+
+        // Pesan tombol kabur yang disesuaikan
+        const noTexts = [
+            "eleuuueleuuuu masii ndaa muutt kaaa 🥺",
+            "nonoooo ndaa muuttt 🙈",
+            "nantiii gemesss naa ilanggg 😭",
+            "atuuu beyiinn jajann niii 🛒✨"
+        ];
+
+        // Tombol "Gak Mau" kabur/menghindar kalau di-hover atau diklik
+        function moveNoButton() {
+            const noBtn = document.getElementById('no-btn');
+            const yesBtn = document.getElementById('yes-btn');
+            
+            if (noClickCount < noTexts.length) {
+                noBtn.innerText = noTexts[noClickCount];
+            } else {
+                noBtn.innerText = "Yakin gak mau dibeyiinn? 🥺💔";
+            }
+
+            noClickCount++;
+
+            const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
+            yesBtn.style.fontSize = `${currentSize + 2}px`;
+            yesBtn.style.padding = `${14 + noClickCount * 2}px`;
+
+            const card = document.getElementById('main-card');
+            card.classList.add('shake-animation');
+            setTimeout(() => card.classList.remove('shake-animation'), 500);
+        }
+
+        // Ketika pacar bilang udah mood lagi
+        function acceptApology() {
+            document.getElementById('sad-emoji').innerText = '🥰';
+            document.getElementById('title-text').innerText = 'YEAY! Moodnya Udah Balik! 🎉❤️';
+            document.getElementById('title-text').className = 'text-2xl font-bold font-bubble text-emerald-500 mb-2';
+            
+            document.getElementById('sub-text').innerText = 'Nah gitu dong senyum! Sekarang kamu pilih jajan di bawah ini yaaa 👇✨';
+            
+            // Menu Pilihan Jajan Terbaru
+            document.getElementById('promise-card').innerHTML = `
+                <div class="text-center py-1">
+                    <p class="text-sm font-bold text-rose-500 mb-3 font-bubble">niiii bubbbb piliiii jajannnnn nantiii atuu beyiinnnn 🥺👉👈</p>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <button onclick="selectSnack('Coffee ☕', this)" class="snack-btn p-2.5 rounded-xl border border-rose-200 bg-white hover:bg-rose-100 transition font-medium text-gray-700">Coffee ☕</button>
+                        <button onclick="selectSnack('Matcha 🍵', this)" class="snack-btn p-2.5 rounded-xl border border-rose-200 bg-white hover:bg-rose-100 transition font-medium text-gray-700">Matcha 🍵</button>
+                        <button onclick="selectSnack('Susu Full Cream 🥛', this)" class="snack-btn p-2.5 rounded-xl border border-rose-200 bg-white hover:bg-rose-100 transition font-medium text-gray-700">Susu Full Cream 🥛</button>
+                        <button onclick="selectSnack('Yogurt 🍦', this)" class="snack-btn p-2.5 rounded-xl border border-rose-200 bg-white hover:bg-rose-100 transition font-medium text-gray-700">Yogurt 🍦</button>
+                        <button onclick="selectSnack('Dimsum 🥟', this)" class="snack-btn p-2.5 rounded-xl border border-rose-200 bg-white hover:bg-rose-100 transition font-medium text-gray-700">Dimsum 🥟</button>
+                        <button onclick="selectSnack('Kebab 🌯', this)" class="snack-btn p-2.5 rounded-xl border border-rose-200 bg-white hover:bg-rose-100 transition font-medium text-gray-700">Kebab 🌯</button>
+                    </div>
+                </div>
+            `;
+            document.getElementById('promise-card').className = 'bg-rose-50 border border-rose-200 rounded-2xl p-4 mb-6 shadow-inner';
+
+            document.getElementById('btn-container').innerHTML = `
+                <button onclick="finishAndSend()" id="send-wa-btn" class="w-full py-3.5 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-2xl shadow-lg shadow-emerald-200 transition transform active:scale-95 text-sm">
+                    Kirim Pilihan Jajan 📱
+                </button>
+            `;
+
+            createHearts();
+        }
+
+        // Fungsi Pilih Jajan
+        function selectSnack(snackName, btn) {
+            selectedSnack = snackName;
+            document.querySelectorAll('.snack-btn').forEach(b => {
+                b.classList.remove('bg-rose-500', 'text-white', 'border-rose-500');
+                b.classList.add('bg-white', 'text-gray-700', 'border-rose-200');
+            });
+            btn.classList.remove('bg-white', 'text-gray-700', 'border-rose-200');
+            btn.classList.add('bg-rose-500', 'text-white', 'border-rose-500');
+        }
+
+        // Tampilan Ending setelah pilih jajan
+        function finishAndSend() {
+            document.getElementById('sad-emoji').innerText = '🤗';
+            document.getElementById('title-text').innerText = 'Cupppcuppppppp 😘❤️';
+            document.getElementById('title-text').className = 'text-2xl font-bold font-bubble text-rose-500 mb-2';
+
+            document.getElementById('sub-text').className = 'text-rose-600 text-base font-semibold leading-relaxed mb-6 font-bubble';
+            document.getElementById('sub-text').innerText = 'bububbbbbb, udaaaa iaaaaa bett mutt naaaa, nantii pipiii naa makinnn enyoiii looo, mawuu amuuu pipiii naa tambaa enyoiiii xixi, cupppcuppppppp, ciniiii peyukkk 🤗💖✨';
+
+            document.getElementById('promise-card').innerHTML = `
+                <div class="text-center py-2">
+                    <span class="text-4xl">🫂💖✨</span>
+                    <p class="text-xs font-bold text-rose-500 mt-2">Peyukkk Kencenggg Bubu! 💖</p>
+                </div>
+            `;
+            document.getElementById('promise-card').className = 'bg-rose-100 border border-rose-300 rounded-2xl p-4 mb-6 shadow-inner';
+
+            document.getElementById('btn-container').innerHTML = `
+                <button onclick="sendWhatsApp()" class="w-full py-3.5 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-2xl shadow-lg shadow-emerald-200 transition transform active:scale-95 text-sm">
+                    Buka WhatsApp Sekarang 💬
+                </button>
+            `;
+
+            createHearts();
+        }
+
+        // Efek love bertebaran
+        function createHearts() {
+            for (let i = 0; i < 30; i++) {
+                const heart = document.createElement('div');
+                heart.innerText = ['💖', '🌸', '✨', '🥺', '🌷', '🤗'][Math.floor(Math.random() * 6)];
+                heart.style.position = 'fixed';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = '100vh';
+                heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                heart.style.transition = 'all 3s ease-out';
+                heart.style.opacity = '1';
+                heart.style.zIndex = '100';
+
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.style.top = '-10vh';
+                    heart.style.left = (parseFloat(heart.style.left) + (Math.random() * 20 - 10)) + 'vw';
+                    heart.style.opacity = '0';
+                }, 50);
+
+                setTimeout(() => heart.remove(), 3000);
+            }
+        }
+
+        // Kirim konfirmasi via WA
+        function sendWhatsApp() {
+            const phone = "6281234567890"; // Ganti nomor WA kamu di sini
+            let snackText = selectedSnack ? `Aku mau jajannn: ${selectedSnack} 😋` : "Aku mau jajann banyak pokoknya! 😜";
+            
+            const message = encodeURIComponent(`Halo sayang! Aku udah nda ngambek lagi kok 🥰\n\n${snackText}\n\nCiniiii peyukkk 🤗💖`);
+            window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+        }
+    </script>
+</body>
+</html>
